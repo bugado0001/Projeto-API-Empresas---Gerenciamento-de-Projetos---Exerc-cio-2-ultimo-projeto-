@@ -13,7 +13,7 @@ const { validarID } = require('../validators/IdValidator')
 const { validarCargo } = require('../validators/CargoValidator')
 const { validarDepartamento } = require('../validators/DepartamentoValidator')
 const { validarFuncionario } = require('../validators/FuncionarioValidator')
-const { projetoValidador } = require('../validators/ProjetoValidator')
+const { validarProjeto } = require('../validators/ProjetoValidator')
 const { tarefaValidador } = require('../validators/TarefaValidator')
 
 // Cargo
@@ -39,11 +39,11 @@ router.put('/funcionarios/:id', validarID, validarFuncionario, FuncionarioContro
 router.delete('/funcionarios/:id', validarID, FuncionarioController.excluir)
 
 // Projetos
-router.post('/projetos', projetoValidador, ProjetoController.create)
-router.get('/projetos', ProjetoController.getAll)
-router.get('/projetos/:id', validarID, ProjetoController.getById)
-router.put('/projetos/:id', validarID, projetoValidador, ProjetoController.update)
-router.delete('/projetos/:id', validarID, ProjetoController.remove)
+router.post('/projetos', validarProjeto, ProjetoController.criar)
+router.get('/projetos', validarProjeto, ProjetoController.bucarTodos)
+router.get('/projetos/:id', validarID, ProjetoController.bucarPorID)
+router.put('/projetos/:id', validarID, ProjetoController.atualizar)
+router.delete('/projetos/:id', validarID, ProjetoController.excluir)
 
 // Tarefas
 router.post('/tarefas', tarefaValidador, TarefaController.create)
